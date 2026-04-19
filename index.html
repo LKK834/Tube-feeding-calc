@@ -8,7 +8,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="TF Calc">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3022/3022566.png">
+    
+    <link rel="apple-touch-icon" href="./IMG_3272.png">
 
     <script>
       if ('serviceWorker' in navigator) {
@@ -36,7 +37,7 @@
         .total-val { color: #e67e22; font-size: 18px; }
         .footer { text-align: center; font-size: 11px; color: #999; margin-top: 20px; }
         .highlight { border: 2px solid #e67e22; }
-        .strength-input { border: 2px solid #28a745; } /* Green border for strength */
+        .strength-input { border: 2px solid #28a745; }
     </style>
 </head>
 <body>
@@ -88,7 +89,7 @@
             <div class="metric daily"><div class="metric-title">Energy (kcal)</div><div class="metric-value total-val" id="dKcal">0</div></div>
             <div class="metric daily"><div class="metric-title">CHO (g)</div><div class="metric-value total-val" id="dCho">0</div></div>
             <div class="metric daily"><div class="metric-title">Protein (g)</div><div class="metric-value total-val" id="dProt">0</div></div>
-            <div class="metric daily"><div class="metric-title">Fat (g)</div><div class="metric-value" id="dFat">0</div></div>
+            <div class="metric daily"><div class="metric-title">Fat (g)</div><div class="metric-value total-val" id="dFat">0</div></div>
             <div class="metric daily"><div class="metric-title">Na (mg)</div><div class="metric-value" id="dNa">0</div></div>
             <div class="metric daily"><div class="metric-title">K (mg)</div><div class="metric-value" id="dK">0</div></div>
             <div class="metric daily"><div class="metric-title">PO4 (mg)</div><div class="metric-value" id="dPo4">0</div></div>
@@ -142,10 +143,9 @@ function calc() {
     const flush = parseFloat(document.getElementById('flush').value) || 0;
     const g = parseFloat(document.getElementById('bene_g').value) || 0;
     
-    const r = (vol / 1000) * strength; // Apply strength multiplier
+    const r = (vol / 1000) * strength;
     const bene_r = g / bene_base.g;
     
-    // Per Feed Calculations
     const sKcal = (p.kcal * r) + (bene_base.kcal * bene_r);
     const sCho = (p.cho * r);
     const sProt = (p.prot * r) + (bene_base.prot * bene_r);
@@ -156,7 +156,6 @@ function calc() {
     document.getElementById('sProt').innerText = sProt.toFixed(1);
     document.getElementById('sFat').innerText = sFat.toFixed(1);
 
-    // Daily Total Calculations (Note: Na, K, PO4, Ca are also affected by strength)
     document.getElementById('dKcal').innerText = Math.round(sKcal * freq);
     document.getElementById('dCho').innerText = (sCho * freq).toFixed(1);
     document.getElementById('dProt').innerText = (sProt * freq).toFixed(1);
