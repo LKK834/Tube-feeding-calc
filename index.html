@@ -81,7 +81,6 @@
         <div class="section-title">🍽️ Per feed</div>
         <div class="result-grid">
             <div class="metric"><div class="metric-title">Energy (kcal)</div><div class="metric-value" id="sKcal">0</div></div>
-            <div class="metric"><div class="metric-title">kcal/ml</div><div class="metric-value" id="sKcalMl" style="color: #007aff;">0</div></div>
             <div class="metric"><div class="metric-title">CHO (g)</div><div class="metric-value" id="sCho">0</div></div>
             <div class="metric"><div class="metric-title">Protein (g)</div><div class="metric-value" id="sProt">0</div></div>
             <div class="metric"><div class="metric-title">Fat (g)</div><div class="metric-value" id="sFat">0</div></div>
@@ -92,6 +91,7 @@
         <div class="section-title">📅 Daily Total</div>
         <div class="result-grid">
             <div class="metric daily"><div class="metric-title">Energy (kcal)</div><div class="metric-value total-val" id="dKcal">0</div></div>
+            <div class="metric daily"><div class="metric-title">kcal/ml</div><div class="metric-value" id="dKcalMl" style="color: #007aff;">0</div></div>
             <div class="metric daily"><div class="metric-title">CHO (g)</div><div class="metric-value total-val" id="dCho">0</div></div>
             <div class="metric daily"><div class="metric-title">Protein (g)</div><div class="metric-value total-val" id="dProt">0</div></div>
             <div class="metric daily"><div class="metric-title">Fat (g)</div><div class="metric-value total-val" id="dFat">0</div></div>
@@ -171,16 +171,15 @@ function calc() {
     const sProt = ((p.prot * rPrepared) + (bene_base.prot * bene_r)) * adminRatio;
     const sFat = (p.fat * rPrepared) * adminRatio;
     
-    // New kcal/ml calculation
     const kcalMl = actualVolInput > 0 ? (sKcal / actualVolInput) : 0;
 
     document.getElementById('sKcal').innerText = Math.round(sKcal);
-    document.getElementById('sKcalMl').innerText = kcalMl.toFixed(2);
     document.getElementById('sCho').innerText = sCho.toFixed(1);
     document.getElementById('sProt').innerText = sProt.toFixed(1);
     document.getElementById('sFat').innerText = sFat.toFixed(1);
 
     document.getElementById('dKcal').innerText = Math.round(sKcal * freq);
+    document.getElementById('dKcalMl').innerText = kcalMl.toFixed(2);
     document.getElementById('dCho').innerText = (sCho * freq).toFixed(1);
     document.getElementById('dProt').innerText = (sProt * freq).toFixed(1);
     document.getElementById('dFat').innerText = (sFat * freq).toFixed(1);
